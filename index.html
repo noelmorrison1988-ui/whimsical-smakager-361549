@@ -30,11 +30,19 @@ button:focus-visible,.chip:focus-visible{outline:3px solid #e7dac5;outline-offse
 .tv-layout .chip{min-height:100px;font-size:19px}
 #remoteHelp{display:none;position:absolute;z-index:15;left:20px;right:20px;top:23%;padding:22px;border:1px solid #c9b89b;border-radius:13px;background:#181817ee;color:#eee1cb;line-height:1.8;max-width:520px;margin:auto}
 #remoteHelp button{padding:12px 20px;border:1px solid #baa68b;border-radius:9px;background:#5b6a4b;color:#fff}
+
+/* Distraction-free player: overlay chrome disappears after seven seconds. */
+.app .headbar,.app .meta,.app .actions,.app .btm,.app .scrim{transition:opacity .36s ease,visibility .36s ease}
+.app.chrome-hidden .headbar,.app.chrome-hidden .meta,.app.chrome-hidden .actions,.app.chrome-hidden .btm,.app.chrome-hidden .scrim{opacity:0;visibility:hidden;pointer-events:none}
+.app.chrome-hidden{cursor:none}
+.app .brand{opacity:.48;text-shadow:0 1px 6px #000}
+.app.tv-layout .headbar{background:transparent}
+@media(prefers-reduced-motion:reduce){.app .headbar,.app .meta,.app .actions,.app .btm,.app .scrim{transition:none}}
 </style></head><body><main class="app">
 <section id="welcome" class="page welcome active"><div class="eyebrow">NM PRIVATE LEARNING</div><div class="logo">EDGE <span>by NM</span></div><h2>Think sharper.<br>Move smarter.</h2><p class="muted">Business, psychology, money and ideas worth listening to. Real speakers. Real video. Your feed, your rules.</p><button class="primary" onclick="go('All Topics')">▶ GO — ALL TOPICS</button><button class="secondary" onclick="show('categories')">▦ PICK A CATEGORY</button><button class="smallbtn" onclick="go('Current News')" style="background:#603746;color:white;border-color:#a68384">◉ CURRENT NEWS · LAST 48 HOURS</button><button class="smallbtn" onclick="showCollections()">📚 Learning collections</button><button class="smallbtn" onclick="show('settings')">⚙ Discovery settings</button><p class="note">Personalised recommendations improve as you watch and save. No account needed for EDGE. Videos are played through YouTube's official embedded player.</p><div class="links">Black • Olive • Beige • Brown • Maroon • Slate<br>Personal learning library</div></section>
 <section id="categories" class="page categories"><div class="hdr"><button class="smallbtn" onclick="show('welcome')">← Back</button><h2>Explore</h2><button class="smallbtn" onclick="show('settings')">⚙</button></div><input class="search" placeholder="Find a topic or speaker" oninput="filterCategories(this.value)"><div id="chipgrid" class="chipgrid"></div></section>
 <section id="settings" class="page settings"><div class="hdr"><button class="smallbtn" onclick="show('welcome')">← Back</button><h2>Discovery</h2></div><h3>Automatic YouTube discovery</h3><p class="muted">EDGE now uses a server-side API connection managed by Netlify. You do not have to paste an API key on this device. Videos will play using YouTube's official embedded player.</p><p class="note">One-time setup in Netlify: Site configuration → Environment variables → Add YOUTUBE_API_KEY, with your newly rotated key. Then redeploy this ZIP. Keep the key private and restrict it to YouTube Data API v3 in Google Cloud. API requests consume your daily quota. Discovery results are cached where supported.</p><div id="setupError" class="err"></div><button class="secondary" onclick="go('All Topics')">Launch feed</button></section>
-<section id="feed" class="page feed"><div id="playerHolder" class="player"><div id="player"></div></div><div id="gesture" class="gesture" aria-label="Swipe or tap to control video"></div><div class="scrim"></div><div id="loading" class="loading"></div><div class="headbar"><button class="smallbtn" onclick="stop();show('categories')">← Topics</button><div class="brand">EDGE <em>by NM</em></div><button class="smallbtn" onclick="showSaved()">My List</button></div><div class="hint">Swipe up/down or remote ↑↓ • OK play/pause • Double-tap to save</div><div class="meta"><div id="category" class="accent" style="font-size:12px"></div><h2 id="title"></h2><p id="channel"></p></div><div class="actions"><button id="bookmark" onclick="saveCurrent()">☆</button><button onclick="change(-1)">↑</button><button onclick="change(1)">↓</button></div><div class="btm"><button onclick="showCollections()">Collections</button><button onclick="change(1)">Next ↓</button><button onclick="showSaved()">Saved</button><button onclick="toggleMode()" id="mode">For You</button><button onclick="switchDisplay()" id="displayMode" title="Switch mobile / TV layout">📺 TV</button><button onclick="toggleFullscreen()" id="fullScreen" title="Toggle fullscreen">⛶ Full</button><button onclick="remoteGuide()" title="Mi Box remote controls">⌨ Remote</button></div></section>
+<section id="feed" class="page feed"><div id="playerHolder" class="player"><div id="player"></div></div><div id="gesture" class="gesture" aria-label="Swipe or tap to control video"></div><div class="scrim"></div><div id="loading" class="loading"></div><div class="headbar"><button class="smallbtn" onclick="stop();show('categories')">← Topics</button><div class="brand">EDGE <em>by NM</em></div><button class="smallbtn" onclick="showSaved()">My List</button></div><div class="meta"><div id="category" class="accent" style="font-size:12px"></div><h2 id="title"></h2><p id="channel"></p></div><div class="actions"><button id="bookmark" onclick="saveCurrent()">☆</button><button onclick="change(-1)">↑</button><button onclick="change(1)">↓</button></div><div class="btm"><button onclick="showCollections()">Collections</button><button onclick="change(1)">Next ↓</button><button onclick="showSaved()">Saved</button><button onclick="toggleMode()" id="mode">For You</button><button onclick="switchDisplay()" id="displayMode" title="Switch mobile / TV layout">📺 TV</button><button onclick="toggleFullscreen()" id="fullScreen" title="Toggle fullscreen">⛶ Full</button><button onclick="remoteGuide()" title="Mi Box remote controls">⌨ Remote</button></div></section>
 <section id="saved" class="page saved"><div class="hdr"><button class="smallbtn" onclick="backFromSaved()">← Back</button><h2>My List</h2></div><div id="saveditems"></div></section><div id="toast" class="toast">Saved ★</div><div id="remoteHelp"><strong>Mi Box Remote Controls</strong><div>↑ Previous clip<br>↓ Next clip<br>OK / Enter Play or pause<br>← Save / unsave<br>→ Open topics<br>Back / Escape Leave fullscreen or return to topics<br>Menu or M Switch Mobile / TV view<br>F Toggle fullscreen</div><button onclick="remoteGuide()">Close</button></div></main>
 <section id="collections" class="page"><div class="hdr"><button class="smallbtn" onclick="stop();show('welcome')">← Home</button><h2>Learning paths</h2></div><p class="muted">Curated multi-topic series. Each path discovers real YouTube videos on its subjects and prioritises those you haven't watched.</p><div id="collectionCards"></div><p class="tiny">A learning path is a playlist of discovered creator videos, not a course endorsed by the creators.</p></section>
 
@@ -45,7 +53,7 @@ const categories=['Current News','All Topics','Dan Martell','Business & Entrepre
 const catalog=[{id:'sYo8pakG1ho',title:'Buy Back Your Time',channel:'Dan Martell',category:'Dan Martell'},{id:'7PDn091o6_E',title:'Entrepreneurs: Buy Back Time',channel:'Dan Martell',category:'Dan Martell'},{id:'w4NJi6cRnpI',title:'Sales lessons',channel:'Alex Hormozi',category:'Sales & Negotiation'},{id:'VOXrpW-rotE',title:'Leadership',channel:'Simon Sinek',category:'Leadership'},{id:'y7xAtSETznY',title:'Motivation',channel:'Simon Sinek',category:'Psychology'},{id:'AJmTb7ElhmY',title:'Learn to Sell',channel:'Alex Hormozi',category:'Sales & Negotiation'},{id:'GhRY0r-ZAAg',title:'AI and the Future of Sales',channel:'Alex Hormozi',category:'AI & Automation'}];
 let list=[],i=0,currentCategory='All Topics',hadApi=false,source='feed',lastTouch=0,startY=0;
 let saved=JSON.parse(localStorage.getItem('edge_nm_saved_v3')||'[]');const $=id=>document.getElementById(id);
-function show(id){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));$(id).classList.add('active');}
+function show(id){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));$(id).classList.add('active');if(id!=='feed')document.querySelector('.app').classList.remove('chrome-hidden');else wakeChrome();}
 function filterCategories(v=''){const names=categories.filter(c=>c.toLowerCase().includes(v.toLowerCase()));$('chipgrid').innerHTML=names.map(c=>`<button class="chip" data-cat="${c.replace(/"/g,'&quot;')}">${c}<small>Explore videos →</small></button>`).join('');document.querySelectorAll('.chip').forEach(el=>el.onclick=()=>go(el.dataset.cat))}filterCategories();
 function warning(txt){$('setupError').style.display='block';$('setupError').textContent=txt}
 function queryFor(cat){if(cat==='The Diary of a CEO')return '"The Diary Of A CEO" Steven Bartlett shorts interview business psychology';if(speakers.includes(cat))return `"${cat}" shorts business advice`; const topics={'All Topics':'business psychology money entrepreneurship negotiation leadership productivity shorts','Compounding':'compounding interest habits finance shorts','Legal Grey Areas':'business ethics legal loopholes corporate incentives explained shorts','Book Recommendations':'business books summary lessons shorts','Business Trends':'new business trends technology entrepreneurship shorts'};return (topics[cat]||`${cat} business lessons shorts`) + ' -music -gaming';}
@@ -107,7 +115,7 @@ async function discover(cat){
 if(cat==='Current News')return discoverNews();
 hadApi=true;
 const queries=searchesFor(cat);const found=new Map();
-for(const query of queries.slice(0,cat==='All Topics'?6:2)){
+for(const query of queries.slice(0,cat==='All Topics'?8:2)){
   const u=new URL('/.netlify/functions/youtube',location.origin);u.searchParams.set('endpoint','search');
   Object.entries({part:'snippet',q:query,type:'video',videoEmbeddable:'true',videoDuration:'short',maxResults:'35',safeSearch:'moderate',order:'relevance'}).forEach(([k,v])=>u.searchParams.set(k,v));
   const r=await fetch(u,{headers:{'Accept':'application/json'}});const j=await r.json();
@@ -160,7 +168,47 @@ const PROFILE_KEY='edge_nm_interest_v1';const CACHE_PREFIX='edge_nm_discovery_v1
 let interest={};try{interest=JSON.parse(localStorage.getItem(PROFILE_KEY)||'{}')}catch(e){}
 function bump(v,weight=1){if(!v)return;for(const t of [v.channel,v.category])if(t){const k=t.toLowerCase();interest[k]=Math.min(500,(interest[k]||0)+weight)}try{localStorage.setItem(PROFILE_KEY,JSON.stringify(interest))}catch(e){}}
 function preferred(v){return (interest[(v.channel||'').toLowerCase()]||0)+(interest[(v.category||'').toLowerCase()]||0)}
-function personalisedOrder(videos,cat){const history=new Set(categoryHistory(cat));let groups=new Map();for(const v of shuffleFeed(videos)){const score=Math.max(0,Math.min(4,Math.round(preferred(v)/5)));const rank=(history.has(v.id)?10:0)-score;const group=groups.get(rank)||[];group.push(v);groups.set(rank,group)}return [...groups.entries()].sort((a,b)=>a[0]-b[0]).flatMap(x=>x[1])}
+// Mixed-source feeds use speaker-balanced scheduling rather than rewarding the
+// same two high-engagement presenters repeatedly. Explicit single-speaker tabs
+// remain unaffected, and Current News stays independent.
+const SOLO_SPEAKERS=new Set([...speakers,'The Diary of a CEO']);
+function speakerKey(v){
+ const name=String(v.channel||'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\\s+/g,' ').trim();
+ for(const speaker of SOLO_SPEAKERS){
+  const key=speaker.toLowerCase().replace(/[^a-z0-9 ]/g,' ').trim();
+  if(name===key||name.startsWith(key+' ')||name.includes(' '+key+' '))return key;
+ }
+ return name||'unknown publisher';
+}
+function balanceSpeakers(items,cat,lastSpeaker=''){
+ if(SOLO_SPEAKERS.has(cat)||cat==='My List'||!items.length)return freshOrder(items,cat);
+ const seen=new Set(categoryHistory(cat));
+ const buckets=new Map();
+ for(const v of shuffleFeed(items)){
+  const k=speakerKey(v);
+  if(!buckets.has(k))buckets.set(k,[]);
+  buckets.get(k).push(v);
+ }
+ // Keep unwatched content at the front of each source's own queue.
+ for(const [k,vs] of buckets)buckets.set(k,vs.sort((a,b)=>Number(seen.has(a.id))-Number(seen.has(b.id))));
+ const result=[];let last=lastSpeaker;const recent=[];
+ while([...buckets.values()].some(a=>a.length)){
+  const choices=[...buckets.entries()].filter(([_,a])=>a.length&&_!==last);
+  const available=choices.length?choices:[...buckets.entries()].filter(([_,a])=>a.length);
+  // Prefer speakers least represented in the preceding ten positions.
+  const ranked=available.map(([k,a])=>({k,a,frequency:recent.filter(x=>x===k).length,unwatched:!seen.has(a[0].id)}));
+  const min=Math.min(...ranked.map(x=>x.frequency));
+  const low=ranked.filter(x=>x.frequency===min);
+  // Among equally exposed speakers, gently favour an unwatched video.
+  const fresh=low.filter(x=>x.unwatched);
+  const candidates=fresh.length?fresh:low;
+  const picked=candidates[Math.floor(Math.random()*candidates.length)];
+  const v=picked.a.shift();result.push(v);last=picked.k;recent.push(last);if(recent.length>10)recent.shift();
+ }
+ return result;
+}
+function personalisedOrder(videos,cat){return balanceSpeakers(videos,cat)}
+
 function cached(cat){try{const item=JSON.parse(localStorage.getItem(CACHE_PREFIX+cat));if(!item)return null;if(cat==='Current News'){if(Date.now()-item.at>=10*60e3)return null;return (item.items||[]).filter(v=>{const t=Date.parse(v.publishedAt||'');return t>=Date.now()-48*3600000&&t<=Date.now()+120000})}return Date.now()-item.at<12*3600e3?item.items:null}catch(e){return null}}
 function cache(cat,items){try{localStorage.setItem(CACHE_PREFIX+cat,JSON.stringify({at:Date.now(),items:items.slice(0,160)}))}catch(e){}}
 let discoveryToken=0;
@@ -191,7 +239,7 @@ async function go(cat){
  activePath=null;const token=++discoveryToken;currentCategory=cat;source='feed';show('feed');$('loading').textContent='Finding videos…';
  destroyVideo();
  try{
-   const found=await discoveryWithCache(cat);if(token!==discoveryToken)return;list=cat==='Current News'?shuffleFeed(found):personalisedOrder(found,cat);i=0;
+   const found=await discoveryWithCache(cat);if(token!==discoveryToken)return;list=cat==='Current News'?balanceSpeakers(found,'Current News'):personalisedOrder(found,cat);i=0;
    if(!list.length){$('loading').textContent=hadApi?'No embeddable short videos found. Try another topic.':'YouTube discovery is not connected. Configure YOUTUBE_API_KEY in Netlify and redeploy.';return}
    render();
  }catch(e){$('loading').textContent='Discovery failed: '+e.message;}
@@ -200,7 +248,7 @@ function destroyVideo(){if(ytPlayer&&typeof ytPlayer.destroy==='function'){try{y
 function render(){
  if(currentCategory==='Current News'){list=list.filter(v=>{const t=Date.parse(v.publishedAt||'');return Number.isFinite(t)&&t>=Date.now()-48*3600000&&t<=Date.now()+120000});if(i>=list.length)i=0;}
  if(!list.length){$('loading').textContent='No qualifying news clips in the last 48 hours. Return to topics to refresh.';return;}
- const v=list[i];noteWatched(v);const serial=++playerSerial;destroyVideo();
+ const v=list[i];noteWatched(v);wakeChrome();const serial=++playerSerial;destroyVideo();
  $('loading').textContent=ytReady?'Starting video…':'Loading YouTube player…';
  $('title').textContent=v.title;$('category').textContent=v.category;$('channel').textContent='🎙 '+v.channel+' • YouTube';
  $('bookmark').textContent=saved.some(x=>x.id===v.id)?'★':'☆';
@@ -227,7 +275,7 @@ function change(n){
  if(n>0 && i===list.length-1 && list.length>1){
    const lastId=list[i].id;
    // Every feed gets a new random order after a full cycle.
-   list=personalisedOrder(list,currentCategory);
+   list=currentCategory==='Current News'?shuffleFeed(list):balanceSpeakers(list,currentCategory,speakerKey(list[i]));
    if(list[0].id===lastId){const other=1+Math.floor(Math.random()*(list.length-1));[list[0],list[other]]=[list[other],list[0]];}
    i=0;
  }else{i=(i+n+list.length)%list.length;}
@@ -247,7 +295,23 @@ function switchDisplay(){tvDisplay=!tvDisplay;localStorage.setItem('edge_nm_disp
 async function toggleFullscreen(){const el=document.querySelector('.app');try{if(document.fullscreenElement){await document.exitFullscreen()}else{await el.requestFullscreen();if(tvDisplay&&screen.orientation?.lock)await screen.orientation.lock('landscape').catch(()=>{})}}catch(e){$('loading').textContent='Fullscreen or landscape rotation is not supported here. Try Chrome or rotate your device.'}}
 document.addEventListener('fullscreenchange',()=>{$('fullScreen').textContent=document.fullscreenElement?'⛶ Exit':'⛶ Full';if(!document.fullscreenElement&&screen.orientation?.unlock){try{screen.orientation.unlock()}catch(e){}}});
 applyDisplay();
-
+// Both Mobile and TV use the same inactivity timer and interface visibility.
+let chromeTimer;
+function wakeChrome(){
+ const app=document.querySelector('.app');
+ app.classList.remove('chrome-hidden');
+ clearTimeout(chromeTimer);
+ if($('feed').classList.contains('active')){
+  chromeTimer=setTimeout(()=>{
+   if($('feed').classList.contains('active') && $('remoteHelp').style.display!=='block')app.classList.add('chrome-hidden');
+  },7000);
+ }
+}
+// A physical remote key or touchscreen interaction restores the full controls.
+for(const evt of ['pointerdown','touchstart','mousemove','wheel']){
+ document.querySelector('.app').addEventListener(evt,wakeChrome,{passive:true});
+}
+document.addEventListener('keydown',wakeChrome,true);
 let gestureY=0,gestureX=0,gestureAt=0,lastTapAt=0,gestureMoved=false;
 $('gesture').addEventListener('touchstart',e=>{gestureY=e.touches[0].clientY;gestureX=e.touches[0].clientX;gestureAt=Date.now();gestureMoved=false},{passive:true});
 $('gesture').addEventListener('touchmove',e=>{if(Math.abs(e.touches[0].clientY-gestureY)>15){gestureMoved=true;e.preventDefault()}},{passive:false});
