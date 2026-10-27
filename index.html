@@ -38,11 +38,20 @@ button:focus-visible,.chip:focus-visible{outline:3px solid #e7dac5;outline-offse
 .app .brand{opacity:.48;text-shadow:0 1px 6px #000}
 .app.tv-layout .headbar{background:transparent}
 @media(prefers-reduced-motion:reduce){.app .headbar,.app .meta,.app .actions,.app .btm,.app .scrim{transition:none}}
+
+/* Permanent, unobtrusive EDGE mark on both portrait and widescreen feeds. */
+.edge-permanent-logo{position:absolute;z-index:12;top:calc(15px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);font:700 clamp(18px,2.3vw,29px) Georgia,serif;letter-spacing:.018em;line-height:1.25;pointer-events:none;white-space:nowrap;isolation:isolate;text-shadow:0 1px 5px #000c;--edge-ink:#f4f0e8;--edge-next:#6b7650;opacity:.68;}
+.edge-permanent-logo em{font:400 .56em Arial,sans-serif;font-style:normal;letter-spacing:.02em}
+.edge-logo-ink{color:var(--edge-ink);transition:color 700ms ease;position:relative;display:inline-block}
+.edge-permanent-logo.splash .edge-logo-ink{animation:edge-ink-splash 1.15s ease-out both;color:var(--edge-next)}
+@keyframes edge-ink-splash{0%{clip-path:circle(0% at 50% 50%);filter:brightness(2.2);text-shadow:0 0 10px var(--edge-next)}45%{clip-path:circle(60% at 50% 50%);filter:brightness(1.45)}100%{clip-path:circle(160% at 50% 50%);filter:brightness(1);text-shadow:0 1px 5px #000c}}
+.app.chrome-hidden .edge-permanent-logo{visibility:visible;opacity:.68;cursor:default}
+@media(prefers-reduced-motion:reduce){.edge-permanent-logo.splash .edge-logo-ink{animation:none}}
 </style></head><body><main class="app">
 <section id="welcome" class="page welcome active"><div class="eyebrow">NM PRIVATE LEARNING</div><div class="logo">EDGE <span>by NM</span></div><h2>Think sharper.<br>Move smarter.</h2><p class="muted">Business, psychology, money and ideas worth listening to. Real speakers. Real video. Your feed, your rules.</p><button class="primary" onclick="go('All Topics')">▶ GO — ALL TOPICS</button><button class="secondary" onclick="show('categories')">▦ PICK A CATEGORY</button><button class="smallbtn" onclick="go('Current News')" style="background:#603746;color:white;border-color:#a68384">◉ CURRENT NEWS · LAST 48 HOURS</button><button class="smallbtn" onclick="showCollections()">📚 Learning collections</button><button class="smallbtn" onclick="show('settings')">⚙ Discovery settings</button><p class="note">Personalised recommendations improve as you watch and save. No account needed for EDGE. Videos are played through YouTube's official embedded player.</p><div class="links">Black • Olive • Beige • Brown • Maroon • Slate<br>Personal learning library</div></section>
 <section id="categories" class="page categories"><div class="hdr"><button class="smallbtn" onclick="show('welcome')">← Back</button><h2>Explore</h2><button class="smallbtn" onclick="show('settings')">⚙</button></div><input class="search" placeholder="Find a topic or speaker" oninput="filterCategories(this.value)"><div id="chipgrid" class="chipgrid"></div></section>
 <section id="settings" class="page settings"><div class="hdr"><button class="smallbtn" onclick="show('welcome')">← Back</button><h2>Discovery</h2></div><h3>Automatic YouTube discovery</h3><p class="muted">EDGE now uses a server-side API connection managed by Netlify. You do not have to paste an API key on this device. Videos will play using YouTube's official embedded player.</p><p class="note">One-time setup in Netlify: Site configuration → Environment variables → Add YOUTUBE_API_KEY, with your newly rotated key. Then redeploy this ZIP. Keep the key private and restrict it to YouTube Data API v3 in Google Cloud. API requests consume your daily quota. Discovery results are cached where supported.</p><div id="setupError" class="err"></div><button class="secondary" onclick="go('All Topics')">Launch feed</button></section>
-<section id="feed" class="page feed"><div id="playerHolder" class="player"><div id="player"></div></div><div id="gesture" class="gesture" aria-label="Swipe or tap to control video"></div><div class="scrim"></div><div id="loading" class="loading"></div><div class="headbar"><button class="smallbtn" onclick="stop();show('categories')">← Topics</button><div class="brand">EDGE <em>by NM</em></div><button class="smallbtn" onclick="showSaved()">My List</button></div><div class="meta"><div id="category" class="accent" style="font-size:12px"></div><h2 id="title"></h2><p id="channel"></p></div><div class="actions"><button id="bookmark" onclick="saveCurrent()">☆</button><button onclick="change(-1)">↑</button><button onclick="change(1)">↓</button></div><div class="btm"><button onclick="showCollections()">Collections</button><button onclick="change(1)">Next ↓</button><button onclick="showSaved()">Saved</button><button onclick="toggleMode()" id="mode">For You</button><button onclick="switchDisplay()" id="displayMode" title="Switch mobile / TV layout">📺 TV</button><button onclick="toggleFullscreen()" id="fullScreen" title="Toggle fullscreen">⛶ Full</button><button onclick="remoteGuide()" title="Mi Box remote controls">⌨ Remote</button></div></section>
+<section id="feed" class="page feed"><div id="playerHolder" class="player"><div id="player"></div></div><div id="gesture" class="gesture" aria-label="Swipe or tap to control video"></div><div class="scrim"></div><div id="loading" class="loading"></div><div class="headbar"><button class="smallbtn" onclick="stop();show('categories')">← Topics</button><button class="smallbtn" onclick="showSaved()">My List</button></div><div class="edge-permanent-logo" aria-label="EDGE by NM"><span class="edge-logo-ink">EDGE <em>by NM</em></span></div><div class="meta"><div id="category" class="accent" style="font-size:12px"></div><h2 id="title"></h2><p id="channel"></p></div><div class="actions"><button id="bookmark" onclick="saveCurrent()">☆</button><button onclick="change(-1)">↑</button><button onclick="change(1)">↓</button></div><div class="btm"><button onclick="showCollections()">Collections</button><button onclick="change(1)">Next ↓</button><button onclick="showSaved()">Saved</button><button onclick="toggleMode()" id="mode">For You</button><button onclick="switchDisplay()" id="displayMode" title="Switch mobile / TV layout">📺 TV</button><button onclick="toggleFullscreen()" id="fullScreen" title="Toggle fullscreen">⛶ Full</button><button onclick="remoteGuide()" title="Mi Box remote controls">⌨ Remote</button></div></section>
 <section id="saved" class="page saved"><div class="hdr"><button class="smallbtn" onclick="backFromSaved()">← Back</button><h2>My List</h2></div><div id="saveditems"></div></section><div id="toast" class="toast">Saved ★</div><div id="remoteHelp"><strong>Mi Box Remote Controls</strong><div>↑ Previous clip<br>↓ Next clip<br>OK / Enter Play or pause<br>← Save / unsave<br>→ Open topics<br>Back / Escape Leave fullscreen or return to topics<br>Menu or M Switch Mobile / TV view<br>F Toggle fullscreen</div><button onclick="remoteGuide()">Close</button></div></main>
 <section id="collections" class="page"><div class="hdr"><button class="smallbtn" onclick="stop();show('welcome')">← Home</button><h2>Learning paths</h2></div><p class="muted">Curated multi-topic series. Each path discovers real YouTube videos on its subjects and prioritises those you haven't watched.</p><div id="collectionCards"></div><p class="tiny">A learning path is a playlist of discovered creator videos, not a course endorsed by the creators.</p></section>
 
@@ -334,4 +343,22 @@ document.addEventListener('keydown',e=>{
  else if(key==='ArrowRight'){e.preventDefault();stop();show('categories')}
 });
 if(location.protocol==='file:'||location.protocol==='content:'){$('welcome').querySelector('.note').textContent='IMPORTANT: Downloaded HTML cannot reliably play YouTube embeds (Error 153). Deploy this file to HTTPS, then open the website.'}
+
+// Permanent logotype cycles through the old-money palette every 15 seconds.
+// Animate only the logo: never flash across the video or disrupt player state.
+const edgeColours=['#f4f0e8','#e7dac5','#6b7650','#6c5144','#643e46','#9e9f9b','#27354b','#ffffff','#0e0e0e'];
+let edgeColourIndex=0;
+const edgeMark=document.querySelector('.edge-permanent-logo');
+const edgeInk=document.querySelector('.edge-logo-ink');
+setInterval(()=>{
+  edgeColourIndex=(edgeColourIndex+1)%edgeColours.length;
+  edgeMark.style.setProperty('--edge-next',edgeColours[edgeColourIndex]);
+  edgeMark.classList.remove('splash');
+  void edgeMark.offsetWidth;
+  edgeMark.classList.add('splash');
+  setTimeout(()=>{
+    edgeMark.style.setProperty('--edge-ink',edgeColours[edgeColourIndex]);
+    edgeMark.classList.remove('splash');
+  },1150);
+},15000);
 </script></body></html>
