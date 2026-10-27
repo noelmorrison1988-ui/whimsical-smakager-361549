@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#090a0b"><title>EDGE by NM — Real voices. Real lessons.</title><style>
+:root{--black:#090a0b;--panel:#191917;--cream:#e7dac5;--olive:#6b7650;--maroon:#643e46;--brown:#6c5144;--gray:#9e9f9b;--white:#f7f5ef}*{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--black);font-family:Arial,Helvetica,sans-serif;color:var(--white);overflow:hidden}button,input{font:inherit}button{cursor:pointer}.app{height:100dvh;max-width:540px;margin:auto;position:relative;overflow:hidden;background:var(--black)}.page{position:absolute;inset:0;display:none}.page.active{display:block}.welcome{background:radial-gradient(circle at 75% 35%,#423329 0%,transparent 52%),radial-gradient(circle at 20% 85%,#293229,transparent 45%),var(--black);padding:calc(35px + env(safe-area-inset-top)) 26px 30px;overflow:auto}.eyebrow{color:var(--cream);text-transform:uppercase;letter-spacing:.22em;font-size:10px}.logo{font-family:Georgia,serif;font-size:56px;letter-spacing:-.065em;margin:42px 0 2px}.logo span{font-family:Arial,sans-serif;color:var(--cream);font-size:22px;letter-spacing:0;font-weight:400}h1,h2{font-family:Georgia,serif}.welcome h2{font-size:29px;font-weight:400;line-height:1.12}.muted{color:#bfbdb6;line-height:1.6}.primary,.secondary{display:block;width:100%;padding:17px;border-radius:6px;border:0;margin:11px 0;font-weight:bold;letter-spacing:.045em}.primary{background:var(--olive);color:white}.secondary{background:var(--cream);color:#191817}.smallbtn{background:#262626;color:white;border:1px solid #60584d;border-radius:20px;padding:10px 13px}.categories,.settings,.saved{background:var(--black);padding:calc(20px + env(safe-area-inset-top)) 18px 30px;overflow:auto}.hdr{display:flex;align-items:center;gap:15px;justify-content:space-between}.hdr h2{font-size:27px;margin:8px 0}.chipgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px 0}.chip{min-height:79px;text-align:left;border-radius:10px;border:1px solid #474039;background:linear-gradient(135deg,#22211f,#131413);color:var(--cream);padding:14px;font-weight:700}.chip small{display:block;font-size:10px;color:#bcb5a7;margin-top:6px;font-weight:400}.search,.key{background:#222320;border:1px solid #696152;color:white;padding:13px;border-radius:7px;width:100%}.feed{background:#070707}.player{width:100%;height:100%;border:0;background:#0b0b0b;display:block}.scrim{pointer-events:none;position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.75),transparent 19%,transparent 65%,rgba(0,0,0,.87))}.headbar{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;right:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}.brand{font: bold 19px Georgia,serif;color:white}.brand em{font:12px Arial,sans-serif;color:var(--cream);font-style:normal}.meta{position:absolute;left:18px;right:75px;bottom:calc(70px + env(safe-area-inset-bottom));pointer-events:none}.meta h2{font: bold 21px Arial;line-height:1.24;margin:9px 0}.meta p{font-size:13px;color:#ddd1bd}.actions{position:absolute;right:10px;bottom:calc(85px + env(safe-area-inset-bottom));display:grid;gap:12px}.actions button{border:1px solid #a6a29988;color:white;background:#242729cc;border-radius:50%;height:47px;width:47px;font-size:20px}.btm{position:absolute;bottom:calc(10px + env(safe-area-inset-bottom));left:10px;right:10px;display:flex;justify-content:space-around;gap:5px}.btm button{font-size:12px;padding:11px 10px;background:#161718db;color:white;border:1px solid #484440;border-radius:21px}.hint{position:absolute;top:calc(85px + env(safe-area-inset-top));left:14px;right:14px;color:#e2d8c8;font-size:12px;text-align:center;text-shadow:0 2px 3px #000;pointer-events:none}.item{padding:15px;border:1px solid #50483d;border-radius:9px;margin:10px 0;background:#191a19}.item button{margin-top:10px;color:#101010;background:var(--cream);border:0;padding:9px;border-radius:5px}.note{font-size:12px;color:#bfb5a7;line-height:1.5}.toast{display:none;position:absolute;top:45%;left:22%;right:22%;background:var(--olive);text-align:center;padding:18px;border-radius:8px;z-index:20}.err{color:#eadbc9;background:#3d2324;border:1px solid #7d5551;border-radius:7px;padding:11px;line-height:1.4;display:none}.loading{position:absolute;top:44%;text-align:center;left:15%;right:15%;color:#e4d6bf;pointer-events:none}.accent{color:var(--cream)}.links{margin-top:25px;font-size:12px;color:#aaa}.links a{color:#dbc6a7} .row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+
+.gesture{position:absolute;inset:0;z-index:2;touch-action:none;user-select:none;cursor:pointer}
+.scrim{z-index:3}.headbar,.actions,.btm{z-index:6}.meta,.hint,.loading{z-index:4}
+.taphelp{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:5;background:#101010d9;color:#e7dac5;border:1px solid #bca98a;padding:13px 20px;border-radius:40px;font-size:14px;pointer-events:none;display:none;text-align:center}
+.soundbutton{position:absolute;left:16px;bottom:calc(165px + env(safe-area-inset-bottom));z-index:6;border:1px solid #a6a29988;color:white;background:#242729dd;border-radius:25px;padding:11px}
+</style></head><body><main class="app">
+<section id="welcome" class="page welcome active"><div class="eyebrow">NM PRIVATE LEARNING</div><div class="logo">EDGE <span>by NM</span></div><h2>Think sharper.<br>Move smarter.</h2><p class="muted">Business, psychology, money and ideas worth listening to. Real speakers. Real video. Your feed, your rules.</p><button class="primary" onclick="go('All Topics')">▶ GO — ALL TOPICS</button><button class="secondary" onclick="show('categories')">▦ PICK A CATEGORY</button><button class="smallbtn" onclick="show('settings')">⚙ Discovery settings</button><p class="note">No account needed for EDGE. Videos are played through YouTube's official embedded player.</p><div class="links">Black • Olive • Beige • Brown • Maroon • Slate<br>Personal learning library</div></section>
+<section id="categories" class="page categories"><div class="hdr"><button class="smallbtn" onclick="show('welcome')">← Back</button><h2>Explore</h2><button class="smallbtn" onclick="show('settings')">⚙</button></div><input class="search" placeholder="Find a topic or speaker" oninput="filterCategories(this.value)"><div id="chipgrid" class="chipgrid"></div></section>
+<section id="settings" class="page settings"><div class="hdr"><button class="smallbtn" onclick="show('welcome')">← Back</button><h2>Discovery</h2></div><h3>Automatic YouTube discovery</h3><p class="muted">EDGE now uses a server-side API connection managed by Netlify. You do not have to paste an API key on this device. Videos will play using YouTube's official embedded player.</p><p class="note">One-time setup in Netlify: Site configuration → Environment variables → Add YOUTUBE_API_KEY, with your newly rotated key. Then redeploy this ZIP. Keep the key private and restrict it to YouTube Data API v3 in Google Cloud. API requests consume your daily quota. Discovery results are cached where supported.</p><div id="setupError" class="err"></div><button class="secondary" onclick="go('All Topics')">Launch feed</button></section>
+<section id="feed" class="page feed"><div id="playerHolder" class="player"><div id="player"></div></div><div id="gesture" class="gesture" aria-label="Swipe or tap to control video"></div><div id="taphelp" class="taphelp">Tap to hear audio 🔊</div><button id="soundbutton" class="soundbutton" onclick="enableSound()">🔇 Tap for sound</button><div class="scrim"></div><div id="loading" class="loading"></div><div class="headbar"><button class="smallbtn" onclick="stop();show('categories')">← Topics</button><div class="brand">EDGE <em>by NM</em></div><button class="smallbtn" onclick="showSaved()">My List</button></div><div class="hint">Swipe up for next • Tap for sound • Double-tap to save</div><div class="meta"><div id="category" class="accent" style="font-size:12px"></div><h2 id="title"></h2><p id="channel"></p></div><div class="actions"><button id="bookmark" onclick="saveCurrent()">☆</button><button onclick="change(-1)">↑</button><button onclick="change(1)">↓</button></div><div class="btm"><button onclick="change(1)">Next ↓</button><button onclick="showSaved()">Saved</button><button onclick="toggleMode()" id="mode">For You</button></div></section>
+<section id="saved" class="page saved"><div class="hdr"><button class="smallbtn" onclick="backFromSaved()">← Back</button><h2>My List</h2></div><div id="saveditems"></div></section><div id="toast" class="toast">Saved ★</div></main>
+<script>
+try{localStorage.removeItem('edge_nm_youtube_key')}catch(e){}
+const speakers=['Dan Martell','Alex Hormozi','Simon Sinek','Gary Vaynerchuk','Codie Sanchez','Chris Do','Ali Abdaal','Morgan Housel','Rory Sutherland','Naval Ravikant'];
+const categories=['All Topics','Dan Martell','Business & Entrepreneurship','Money & Wealth','Investing','Corporate Politics','Workplace Ethics','Office Worker Tips','Psychology','Behavioral Economics','Compounding','Calculated Risk','Legal Grey Areas','Sales & Negotiation','Leadership','CEO Mindset','Productivity','Book Recommendations','Business Trends','AI & Automation','Marketing','Careers & Salary','Personal Finance','Decision Making','Motivation','Communication','Buying Businesses','SaaS & Startups','Life Lessons','Mindset & Habits',...speakers.filter(s=>s!=='Dan Martell')];
+const catalog=[{id:'sYo8pakG1ho',title:'Buy Back Your Time',channel:'Dan Martell',category:'Dan Martell'},{id:'7PDn091o6_E',title:'Entrepreneurs: Buy Back Time',channel:'Dan Martell',category:'Dan Martell'},{id:'w4NJi6cRnpI',title:'Sales lessons',channel:'Alex Hormozi',category:'Sales & Negotiation'},{id:'VOXrpW-rotE',title:'Leadership',channel:'Simon Sinek',category:'Leadership'},{id:'y7xAtSETznY',title:'Motivation',channel:'Simon Sinek',category:'Psychology'},{id:'AJmTb7ElhmY',title:'Learn to Sell',channel:'Alex Hormozi',category:'Sales & Negotiation'},{id:'GhRY0r-ZAAg',title:'AI and the Future of Sales',channel:'Alex Hormozi',category:'AI & Automation'}];
+let list=[],i=0,currentCategory='All Topics',hadApi=false,source='feed',lastTouch=0,startY=0;
+let saved=JSON.parse(localStorage.getItem('edge_nm_saved_v3')||'[]');const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));$(id).classList.add('active');}
+function filterCategories(v=''){const names=categories.filter(c=>c.toLowerCase().includes(v.toLowerCase()));$('chipgrid').innerHTML=names.map(c=>`<button class="chip" data-cat="${c.replace(/"/g,'&quot;')}">${c}<small>Explore videos →</small></button>`).join('');document.querySelectorAll('.chip').forEach(el=>el.onclick=()=>go(el.dataset.cat))}filterCategories();
+function warning(txt){$('setupError').style.display='block';$('setupError').textContent=txt}
+function queryFor(cat){if(speakers.includes(cat))return `"${cat}" shorts business advice`; const topics={'All Topics':'business psychology money entrepreneurship negotiation leadership productivity shorts','Compounding':'compounding interest habits finance shorts','Legal Grey Areas':'business ethics legal loopholes corporate incentives explained shorts','Book Recommendations':'business books summary lessons shorts','Business Trends':'new business trends technology entrepreneurship shorts'};return (topics[cat]||`${cat} business lessons shorts`) + ' -music -gaming';}
+
+let ytPlayer=null,ytReady=false,autoplayRequested=false,autoNext=true,playerSerial=0,started=false,needsSound=true,playing=false,soundUnlocked=false;
+window.onYouTubeIframeAPIReady=()=>{ytReady=true;if(autoplayRequested&&list.length)render()};
+const ytScript=document.createElement('script');ytScript.src='https://www.youtube.com/iframe_api';document.head.appendChild(ytScript);
+function secs(d){const m=String(d||'').match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);return m?(+m[1]||0)*3600+(+m[2]||0)*60+(+m[3]||0):99999}
+const searchesFor = cat => {
+  if(speakers.includes(cat)) return [`${cat} business advice shorts`,`${cat} podcast highlights`];
+  const m={'All Topics':['Dan Martell business advice shorts','Alex Hormozi business advice shorts','Simon Sinek leadership shorts','Codie Sanchez entrepreneurship shorts','business psychology lessons shorts'],
+  'Compounding':['compound growth investing explained shorts','power of compounding habits shorts'],
+  'Corporate Politics':['office politics career advice shorts','how to navigate corporate politics shorts'],
+  'Workplace Ethics':['workplace ethics business dilemmas shorts','ethical leadership workplace shorts'],
+  'Office Worker Tips':['office productivity career tips shorts','professional etiquette tips shorts'],
+  'Legal Grey Areas':['ethics of business loopholes explained','behavioral economics ethical pricing shorts'],
+  'Book Recommendations':['Dan Martell book recommendations shorts','best business books explained shorts'],
+  'Business Trends':['business trends 2026 founders shorts','AI business opportunities expert shorts'],
+  'Psychology':['Rory Sutherland behavioral psychology shorts','Morgan Housel psychology of money shorts']};
+  return m[cat]||[`${cat} expert advice shorts`,`${cat} business lesson interview shorts`];
+};
+async function discover(cat){
+hadApi=true;
+const queries=searchesFor(cat);const found=new Map();
+for(const query of queries.slice(0,cat==='All Topics'?5:2)){
+  const u=new URL('/.netlify/functions/youtube',location.origin);u.searchParams.set('endpoint','search');
+  Object.entries({part:'snippet',q:query,type:'video',videoEmbeddable:'true',videoDuration:'short',maxResults:'35',safeSearch:'moderate',order:'relevance'}).forEach(([k,v])=>u.searchParams.set(k,v));
+  const r=await fetch(u,{headers:{'Accept':'application/json'}});const j=await r.json();
+  if(!r.ok)throw new Error(j.error?.message||'YouTube search failed');
+  for(const it of j.items||[])if(it.id?.videoId)found.set(it.id.videoId,it);
+  if(found.size>=30&&cat!=='All Topics')break;
+}
+if(!found.size)return [];
+const ids=[...found.keys()];
+const result=[];
+for(let k=0;k<ids.length;k+=50){
+  const d=new URL('/.netlify/functions/youtube',location.origin);d.searchParams.set('endpoint','videos');
+  Object.entries({part:'contentDetails,status,snippet',id:ids.slice(k,k+50).join(',')}).forEach(([a,b])=>d.searchParams.set(a,b));
+  const r=await fetch(d,{headers:{'Accept':'application/json'}}),json=await r.json();if(!r.ok)throw new Error(json.error?.message||'Video details failed');
+  for(const v of json.items||[]){
+    if(!v.status?.embeddable||v.status?.privacyStatus!=='public')continue;
+    const duration=secs(v.contentDetails?.duration);
+    if(duration<15||duration>240)continue;
+    result.push({id:v.id,title:v.snippet.title,channel:v.snippet.channelTitle,category:cat==='All Topics'?'For You':cat,duration})
+  }
+}
+if(cat==='All Topics'){
+  result.sort((a,b)=>+speakers.some(s=>b.channel.toLowerCase().includes(s.toLowerCase()))-+speakers.some(s=>a.channel.toLowerCase().includes(s.toLowerCase())));
+}
+return result;
+}
+// Shuffle all feeds, favour clips not recently watched in this category.
+const HISTORY_KEY='edge_nm_watched_topics_v1';
+let watchedTopics={};
+try{watchedTopics=JSON.parse(localStorage.getItem(HISTORY_KEY)||'{}')||{}}catch(e){watchedTopics={}}
+function shuffleFeed(items){
+ const result=items.slice();
+ for(let j=result.length-1;j>0;j--){
+   const k=Math.floor(Math.random()*(j+1));
+   [result[j],result[k]]=[result[k],result[j]];
+ }
+ return result;
+}
+function categoryHistory(cat){return Array.isArray(watchedTopics[cat])?watchedTopics[cat]:[]}
+function freshOrder(items,cat){
+ const seen=new Set(categoryHistory(cat));
+ const fresh=shuffleFeed(items.filter(v=>!seen.has(v.id)));
+ const viewed=shuffleFeed(items.filter(v=>seen.has(v.id)));
+ // Once every available video was seen, begin another shuffled cycle.
+ if(!fresh.length){watchedTopics[cat]=[];persistHistory();return shuffleFeed(items)}
+ return fresh.concat(viewed);
+}
+function persistHistory(){try{localStorage.setItem(HISTORY_KEY,JSON.stringify(watchedTopics))}catch(e){}}
+function noteWatched(v){
+ if(!v || source!=='feed')return;
+ const cat=currentCategory, history=categoryHistory(cat).filter(id=>id!==v.id);
+ history.push(v.id);
+ watchedTopics[cat]=history.slice(-500);
+ persistHistory();
+}
+async function go(cat){
+ currentCategory=cat;source='feed';show('feed');$('loading').textContent='Finding videos…';
+ destroyVideo();
+ try{
+   list=freshOrder(await discover(cat),cat);i=0;
+   if(!list.length){$('loading').textContent=hadApi?'No embeddable short videos found. Try another topic.':'YouTube discovery is not connected. Configure YOUTUBE_API_KEY in Netlify and redeploy.';return}
+   render();
+ }catch(e){$('loading').textContent='Discovery failed: '+e.message;}
+}
+function destroyVideo(){if(ytPlayer&&typeof ytPlayer.destroy==='function'){try{ytPlayer.destroy()}catch(e){}}ytPlayer=null;$('playerHolder').innerHTML='<div id="player"></div>';}
+function render(){
+ if(!list.length)return;
+ const v=list[i];noteWatched(v);const serial=++playerSerial;destroyVideo();
+ $('loading').textContent=ytReady?'Starting video…':'Loading YouTube player…';
+ $('title').textContent=v.title;$('category').textContent=v.category;$('channel').textContent='🎙 '+v.channel+' • YouTube';
+ $('bookmark').textContent=saved.some(x=>x.id===v.id)?'★':'☆';
+ if(!ytReady){autoplayRequested=true;return}
+ autoplayRequested=false;
+ ytPlayer=new YT.Player('player',{
+   width:'100%',height:'100%',videoId:v.id,
+   playerVars:{autoplay:1,mute:1,playsinline:1,controls:0,rel:0,enablejsapi:1,origin:location.origin},
+   events:{
+     onReady:e=>{if(serial!==playerSerial)return;try{if(soundUnlocked){e.target.unMute();e.target.setVolume(90)}else{e.target.mute()}e.target.playVideo()}catch(err){} $('loading').textContent='';$('soundbutton').textContent=soundUnlocked?'🔊 Sound on':'🔇 Tap for sound';needsSound=!soundUnlocked;},
+     onStateChange:e=>{if(serial!==playerSerial)return; if(e.data===YT.PlayerState.ENDED){change(1)}else if(e.data===YT.PlayerState.PLAYING){playing=true;$('loading').textContent=''}else if(e.data===YT.PlayerState.PAUSED){playing=false}},
+     onError:e=>{if(serial!==playerSerial)return;$('loading').textContent='Video unavailable in embedded playback. Skipping…';setTimeout(()=>{if(serial===playerSerial)change(1)},1200)}
+   }
+ });
+}
+function enableSound(){
+ if(!ytPlayer||!ytPlayer.unMute)return;
+ try{ytPlayer.unMute();ytPlayer.setVolume(90);ytPlayer.playVideo();needsSound=false;soundUnlocked=true;$('soundbutton').textContent='🔊 Sound on'}catch(e){}
+}
+function controlTap(){
+ if(!ytPlayer||!ytPlayer.getPlayerState)return;
+ if(needsSound){enableSound();return}
+ try{if(ytPlayer.getPlayerState()===YT.PlayerState.PLAYING)ytPlayer.pauseVideo();else ytPlayer.playVideo()}catch(e){}
+}
+function change(n){
+ if(!list.length)return;
+ if(n>0 && i===list.length-1 && list.length>1){
+   const lastId=list[i].id;
+   // Every feed gets a new random order after a full cycle.
+   list=shuffleFeed(list);
+   if(list[0].id===lastId){const other=1+Math.floor(Math.random()*(list.length-1));[list[0],list[other]]=[list[other],list[0]];}
+   i=0;
+ }else{i=(i+n+list.length)%list.length;}
+ render();
+}
+function stop(){playerSerial++;destroyVideo();}
+function saveCurrent(){let v=list[i];if(!v)return;let present=saved.findIndex(x=>x.id===v.id);if(present>=0)saved.splice(present,1);else saved.unshift(v);localStorage.setItem('edge_nm_saved_v3',JSON.stringify(saved));$('bookmark').textContent=present>=0?'☆':'★';$('toast').textContent=present>=0?'Removed from My List':'★ Added to My List';$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',850)}
+function showSaved(){source=$('feed').classList.contains('active')?'feed':'welcome';stop();$('saveditems').innerHTML=saved.map((v,k)=>`<div class="item"><strong>${escapeHTML(v.title)}</strong><p class="note">${escapeHTML(v.channel)}</p><button data-saved="${k}">Watch embedded</button></div>`).join('')||'<p class="muted">Double-tap a video or press ☆ to save it here.</p>';show('saved');document.querySelectorAll('[data-saved]').forEach(b=>b.onclick=()=>{list=saved.slice();i=+b.dataset.saved;show('feed');render()});}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function backFromSaved(){if(source==='feed'){show('feed');render()}else show('welcome')}
+function toggleMode(){show('categories')}
+
+let gestureY=0,gestureX=0,gestureAt=0,lastTapAt=0,gestureMoved=false;
+$('gesture').addEventListener('touchstart',e=>{gestureY=e.touches[0].clientY;gestureX=e.touches[0].clientX;gestureAt=Date.now();gestureMoved=false},{passive:true});
+$('gesture').addEventListener('touchmove',e=>{if(Math.abs(e.touches[0].clientY-gestureY)>15){gestureMoved=true;e.preventDefault()}},{passive:false});
+$('gesture').addEventListener('touchend',e=>{const delta=e.changedTouches[0].clientY-gestureY;if(Math.abs(delta)>55){change(delta<0?1:-1);lastTapAt=0;return}if(gestureMoved)return;const now=Date.now();if(now-lastTapAt<330){saveCurrent();lastTapAt=0}else{lastTapAt=now;setTimeout(()=>{if(lastTapAt===now){controlTap();lastTapAt=0}},345)}},{passive:true});
+$('gesture').addEventListener('click',e=>{if('ontouchstart' in window)return;const now=Date.now();if(now-lastTapAt<330){saveCurrent();lastTapAt=0}else{lastTapAt=now;setTimeout(()=>{if(lastTapAt===now){controlTap();lastTapAt=0}},345)}});
+document.addEventListener('keydown',e=>{if($('feed').classList.contains('active')){if(e.key==='ArrowDown')change(1);if(e.key==='ArrowUp')change(-1);if(e.key===' ')controlTap()}});
+if(location.protocol==='file:'||location.protocol==='content:'){$('welcome').querySelector('.note').textContent='IMPORTANT: Downloaded HTML cannot reliably play YouTube embeds (Error 153). Deploy this file to HTTPS, then open the website.'}
+</script></body></html>
